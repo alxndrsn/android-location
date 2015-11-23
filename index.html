@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+	function updateLocation() {
+		if(!!window.medicmobile_android) {
+			try {
+				return set('location', medicmobile_android.getLocation());
+			} catch(e) {
+				return set('location', 'Failed: ' + e);
+			}
+		}
+	}
+
+	function set(id, v) {
+		document.getElementById(id).innerHTML = v;
+	}
+</script>
+<div id="content">
+	<h2>Version: 1</h2>
+	<h2> Status: <span id="status"></span> </h2>
+	<h2> Location: <span id="location"></span> </h2>
+	<button onclick="updateLocation()">Update location</button>
+
+	<button onclick="window.medicmobile_android.playSound()">Peep!</button>
+</div>
+<script>
+	if(!!window.medicmobile_android) {
+		set('status', 'android extensions OK.');
+	} else {
+		set('status', 'android extensions NOT found.');
+	}
+</script>
+</body>
+</html>
